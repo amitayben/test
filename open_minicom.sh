@@ -56,6 +56,12 @@ rm tmp_script*.sh set_ip*.sh
 #             MAIN           #
 ##############################
 NUM_OF_PORTS="$(ls /dev/ttyUSB* | grep -v ^l | wc -l)"
+if [ $# -eq 0 ]
+  then
+	pass="P@ssw0rd"
+else
+	pass="$1"
+fi
 if [ "$NUM_OF_PORTS" == "0" ]; then
 	printf "Not found any minicom ports\n Exiting......\n" && exit 1;
 fi
