@@ -58,7 +58,7 @@ rm tmp_script*.sh set_ip*.sh
 NUM_OF_PORTS="$(ls /dev/ttyUSB* | grep -v ^l | wc -l)"
 if [ $# -eq 0 ]
   then
-	pass="P@ssw0rd"
+	printf "No password arguments supplied\n Plase run ./your_script password \n Exiting......\n" && exit 1;
 else
 	pass="$1"
 fi
