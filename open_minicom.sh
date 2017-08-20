@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 10
+
 
 open_minicom(){
 PORT_IP=2
@@ -12,22 +12,22 @@ gnome-terminal -t "Minicom port $1 - 192.168.1.$PORT_IP" -x ./tmp_script"$1".sh
 generate_script(){
 echo "$1"
 PORT_NUM="$1"
-#PORT_IP=2
-#PORT_IP=$((PORT_IP+$1))
+PORT_IP=2
+PORT_IP=$((PORT_IP+$1))
 #gconftool-2 --set /apps/gnome-terminal/profiles/Default/title --type=string "Minicom port $PORT_NUM"
 #############################generat script
 touch tmp_script"$1".sh
 chmod 777 tmp_script"$1".sh
 cat <<EOT >> tmp_script"$1".sh
 #!/usr/bin/expect -f
-spawn sudo minicom -D /dev/ttyUSB$PORT_NUM
+spawn sudo minicom -D /dev/ttyUSB$PORT_NUM -S set_ip"$PORT_IP".sh
 expect {
 -re ".*sword.*" {
     exp_send "P@ssw0rd\r"
 }
 }
 interact
-
+EOT
 ###############################
 #open terminal
 
@@ -47,7 +47,7 @@ EOT
 }
 
 MY_distractor(){
-rm tmp_script*.sh
+rm tmp_script*.sh set_ip*.sh
 }
 
 
