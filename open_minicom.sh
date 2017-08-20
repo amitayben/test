@@ -57,7 +57,8 @@ rm tmp_script*.sh set_ip*.sh
 ##############################
 NUM_OF_PORTS="$(ls /dev/ttyUSB* | grep -v ^l | wc -l)"
 if [NUM_OF_PORTS < 1];than
-	echo "Not found any minicom ports\n Exiting......" && exit(0)
+	echo -e "Not found any minicom ports\n Exiting......"
+	exit 1;
 fi
 for (( i=0; i < $NUM_OF_PORTS ; i++ ))
 do
