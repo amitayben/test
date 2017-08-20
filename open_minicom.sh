@@ -23,7 +23,7 @@ cat <<EOT >> tmp_script"$1".sh
 spawn sudo minicom -D /dev/ttyUSB$PORT_NUM -S set_ip"$PORT_IP".sh
 expect {
 -re ".*sword.*" {
-    exp_send "P@ssw0rd\r"
+    exp_send "$pass\r"
 }
 }
 interact
